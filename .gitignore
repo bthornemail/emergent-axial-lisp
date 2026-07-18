@@ -5,3 +5,6 @@ cabal.sandbox.config
 *.o
 *.dyn_hi
 *.dyn_o
+
+
+dev-docs/_archve
