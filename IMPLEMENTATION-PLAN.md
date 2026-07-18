@@ -6,5 +6,8 @@ Current execution scope:
 
 - Pass 0: repository foundation
 - Pass 1: canonical Meta-CONS pair kernel
+- Pass 2: canonical S-expression parser
+- Pass 3: closed multi-axial type foundation
+- Pass 4: canonical semantic serialization
 
 No later pass is implemented by this file.

@@ -19,12 +19,12 @@ Implemented:
 - Pass 2 canonical S-expression parser: atoms, `NIL`, proper lists, dotted pairs, quote shorthand expansion, comments, source positions, and resource bounds
 - Proof Spine A documentation bridge to pinned `omi-axioms`
 - Pass 3 closed multi-axial type foundation: closed axis ADTs, singleton witnesses, type-family mappings, and bounded coordinate smart constructors
+- Pass 4 canonical semantic serialization: versioned binary envelope for canonical S-expressions, closed axes, and bounded coordinate values
 
 Not implemented:
 
 - Evaluator
 - Macro or FEXPR system
-- Axis serialization
 - Axis-driven dispatch
 - Board256
 - Quasigroup resolver profiles
@@ -34,7 +34,9 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, and closed axis classification types.
+The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, and canonical semantic serialization.
+
+Serialization records canonical structure but does not validate application-level meaning, accept declarations, project runtime views, or grant capabilities.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 

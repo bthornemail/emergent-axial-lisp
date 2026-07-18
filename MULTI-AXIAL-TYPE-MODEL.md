@@ -48,3 +48,9 @@ Pass 3 adds hidden-constructor smart types for:
 These types classify coordinates only. Pass 3 does not implement evaluation,
 dispatch, validation, serialization, Hamming parity, carrier byte operations,
 recovery, projection, or reflection.
+
+## Pass 4 Serialization Boundary
+
+Pass 4 adds canonical binary tags for the closed axis values. Those tags record
+which closed coordinate was serialized. They do not add dispatch behavior,
+validation authority, projection authority, or carrier byte operations.

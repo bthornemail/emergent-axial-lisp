@@ -31,5 +31,15 @@ Bootstrap conformance only.
 - `Car32` and `Cdr32` remain nominally distinct
 - identity smart constructors reject empty identifiers
 
+## Pass 4 Tested Behavior
+
+- `decode(encode(value)) = value` for canonical S-expression samples, all closed axis values, and selected bounded coordinate values
+- encoding is deterministic over the bounded sample set
+- pair order changes encoded bytes for distinct operands
+- proper and improper lists produce distinct byte sequences
+- quote-expanded forms serialize as ordinary canonical lists
+- golden fixtures lock the Pass 4 magic bytes, version, tags, text lengths, big-endian integer order, and ordered pair payloads
+- invalid magic, unsupported version, unknown value tags, truncated payloads, invalid UTF-8, oversized atoms, oversized identities, trailing bytes, and excessive nesting are rejected
+
 Proof Spine A is documentation-only. It records upstream theorem correspondence
 but does not prove Haskell correspondence.
