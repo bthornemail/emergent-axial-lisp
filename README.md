@@ -22,13 +22,13 @@ Implemented:
 - Pass 4 canonical semantic serialization: versioned binary envelope for canonical S-expressions, closed axes, and bounded coordinate values
 - Pass 5 deterministic M-expression lowering: readable `CONS`, `CAR`, `CDR`, `LIST`, and `QUOTE` forms lower to ordinary canonical S-expressions
 - Pass 6 stage-indexed language pipeline: typed stage custody, legal transition witnesses, parser bridges, and compile-fail guards
+- Pass 7 parsed-to-expanded core expansion: recognized core forms are shape-checked and arity-checked before `Expanded` custody is earned
 
 Not implemented:
 
 - Evaluator
 - Macro or FEXPR system
 - Axis-driven dispatch
-- Semantic macro expansion
 - Type elaboration
 - Normalization
 - Binding resolution
@@ -41,13 +41,15 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, canonical semantic serialization, deterministic M-expression lowering, and stage-indexed custody.
+The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, canonical semantic serialization, deterministic M-expression lowering, stage-indexed custody, and bounded core expansion from `Parsed` to `Expanded`.
 
 Serialization records canonical structure but does not validate application-level meaning, accept declarations, project runtime views, or grant capabilities.
 
 M-expression lowering is readable syntax translation only. It does not evaluate, resolve bindings, validate application semantics, or modify serialization tags.
 
-Stage-indexed custody prevents ordinary public code from forging later stages. Pass 6 defines the complete legal stage graph, but only `Surface -> Parsed` is currently executable. Later transitions are declared and pending semantic implementations.
+Stage-indexed custody prevents ordinary public code from forging later stages. The legal stage graph is complete, but only `Surface -> Parsed` and `Parsed -> Expanded` are currently executable. The remaining transitions are declared and pending semantic implementations.
+
+Expanded custody means the Pass 7 core-expansion postcondition has been checked. It does not mean macros are expanded, names are resolved, types are correct, expressions are normalized, or code is executable.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 

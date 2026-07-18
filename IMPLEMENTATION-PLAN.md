@@ -12,5 +12,6 @@ Current execution scope:
 - Pass 5: deterministic M-expression lowering
 - Pass 6: stage-indexed language pipeline
 - Pass 6A: stage authority hardening
+- Pass 7: parsed-to-expanded core expansion
 
 No later pass is implemented by this file.

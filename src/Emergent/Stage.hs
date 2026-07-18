@@ -28,10 +28,13 @@ module Emergent.Stage
   , canonicalStagePath
   , parseSurface
   , parseAndLowerMSurface
+  , expandParsed
   ) where
 
 import Data.Text (Text)
 import Emergent.Error (ParseError)
+import Emergent.Expand.Core (expandSExpr)
+import Emergent.Expand.Error (ExpansionError)
 import Emergent.MExpr.Error (MExprError)
 import qualified Emergent.MExpr.Lower as MExpr
 import Emergent.Parser (parseSExpr)
@@ -141,3 +144,7 @@ parseSurface term =
 parseAndLowerMSurface :: Term 'Surface -> Either MExprError (Term 'Parsed)
 parseAndLowerMSurface term =
   ParsedTerm . ParsedForm <$> MExpr.parseAndLowerMExpr (surfaceText term)
+
+expandParsed :: Term 'Parsed -> Either ExpansionError (Term 'Expanded)
+expandParsed term =
+  ExpandedTerm . ExpandedForm <$> expandSExpr (parsedSExpr term)

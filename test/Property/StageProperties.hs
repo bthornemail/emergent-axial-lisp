@@ -20,10 +20,10 @@ tests =
       assertEqual "path nextStage" expectedPathSuccessors (map nextStage canonicalStagePath)
   , TestCase "property: every legal transition agrees with NextStage" $
       mapM_ assertTransitionAgreesWithNextStage allStageTransitions
-  , TestCase "property: transition availability has one implemented and five pending edges" $
+  , TestCase "property: transition availability has two implemented and four pending edges" $
       assertEqual
         "availability counts"
-        (1, 5)
+        (2, 4)
         ( countAvailability ImplementedTransition
         , countAvailability PendingTransition
         )

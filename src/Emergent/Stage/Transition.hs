@@ -63,7 +63,7 @@ transitionAvailability :: StageTransition from to -> TransitionAvailability
 transitionAvailability transition =
   case transition of
     SurfaceToParsed -> ImplementedTransition
-    ParsedToExpanded -> PendingTransition
+    ParsedToExpanded -> ImplementedTransition
     ExpandedToTyped -> PendingTransition
     TypedToNormalized -> PendingTransition
     NormalizedToResolved -> PendingTransition
@@ -82,7 +82,7 @@ allStageTransitions =
 allStageTransitionStatuses :: [StageTransitionStatus]
 allStageTransitionStatuses =
   [ StageTransitionStatus SurfaceToParsed ImplementedTransition
-  , StageTransitionStatus ParsedToExpanded PendingTransition
+  , StageTransitionStatus ParsedToExpanded ImplementedTransition
   , StageTransitionStatus ExpandedToTyped PendingTransition
   , StageTransitionStatus TypedToNormalized PendingTransition
   , StageTransitionStatus NormalizedToResolved PendingTransition

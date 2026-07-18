@@ -9,6 +9,7 @@ category:           Language
 build-type:         Simple
 extra-source-files:
     test/Golden/Parser/*.sexpr
+    test/golden/expand/*.sexpr
     test/golden/mexpr/*.mexpr
     test/golden/mexpr/*.sexpr
     test/golden/serialization/*.hex
@@ -34,6 +35,9 @@ library
     import:           warnings
     exposed-modules:
         Emergent.Error
+        Emergent.Expand
+        Emergent.Expand.Core
+        Emergent.Expand.Error
         Emergent.MExpr
         Emergent.MExpr.Error
         Emergent.MExpr.Lower
@@ -75,10 +79,12 @@ test-suite emergent-axial-lisp-test
     type:             exitcode-stdio-1.0
     main-is:          Main.hs
     other-modules:
+        Golden.ExpansionGolden
         Golden.ParserGolden
         Golden.MExprGolden
         Golden.SerializationGolden
         Property.AxisProperties
+        Property.ExpansionProperties
         Property.ParserRoundTrip
         Property.KernelProperties
         Property.MExprProperties
@@ -86,6 +92,7 @@ test-suite emergent-axial-lisp-test
         Property.StageProperties
         TestHarness
         Unit.AxisSpec
+        Unit.ExpandSpec
         Unit.KernelSpec
         Unit.MExprSpec
         Unit.ParserSpec

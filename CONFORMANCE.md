@@ -60,12 +60,30 @@ Bootstrap conformance only.
 - canonical surface parsing produces only `Parsed` custody
 - M-expression surface parsing and lowering produces `Parsed` custody through a distinct bridge
 - legal transition witnesses cover exactly six stage edges
-- transition availability marks exactly one implemented edge and five pending edges
+- transition availability marks exactly two implemented edges and four pending edges after Pass 7
 - `Lowered` has no outgoing transition
 - `SomeTerm` preserves its stage witness
 - parsed custody preserves canonical syntax structure
 - compile-fail fixtures reject using `Parsed` as `Typed`, lowering `Parsed` directly, resolving `Surface`, constructing `Resolved` through public constructors, constructing a `Lowered` successor, using existential payloads without stage recovery, importing removed identity-transition functions, and calling removed identity-transition functions
 - bounded property-style tests cover independently specified observed stages, `nextStage` agreement, legal-transition agreement with `NextStage`, transition availability counts, no transition from `Lowered`, and existential stage preservation
+
+## Pass 7 Tested Behavior
+
+- `expandSExpr` is total over the bounded sample set and returns typed expansion errors
+- `expandParsed` is the only public production path to `Term 'Expanded`
+- ordinary atoms and ordinary proper applications are preserved structurally
+- `quote`, `if`, `lambda`, `begin`, `define`, and `set!` are recognized as core forms
+- recognized core forms enforce their locked arity rules
+- quoted payloads are opaque and preserve improper pair data
+- malformed lambda parameters and duplicate lambda parameter names are rejected
+- variable `define` is accepted, while function-definition sugar is rejected as unsupported
+- improper application forms outside `quote` are rejected
+- unknown proper application heads remain ordinary applications
+- expansion nesting is bounded at 1024
+- transition availability marks exactly two implemented edges and four pending edges
+- bounded property-style tests cover determinism, idempotence, argument-order preservation, quote opacity, deterministic serialization of expanded output as a downstream observation, and implemented-edge agreement with `NextStage`
+- compile-fail fixtures reject direct construction of `Expanded` and `Typed`, advancing `Expanded` to `Typed`, calling removed identity elaboration, and using `Parsed` where `Expanded` is required
+- golden fixtures lock representative canonical S-expression inputs to canonical expanded output
 
 Proof Spine A is documentation-only. It records upstream theorem correspondence
 but does not prove Haskell correspondence.

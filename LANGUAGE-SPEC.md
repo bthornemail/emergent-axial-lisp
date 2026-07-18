@@ -2,7 +2,7 @@
 
 ## Status
 
-Defined model for Pass 1 through Pass 6.
+Defined model for Pass 1 through Pass 7.
 
 ## Canonical SEXPR
 
@@ -263,7 +263,9 @@ maximum arguments per call: 256
 
 ## Stage-Indexed Custody
 
-Pass 6 establishes legal stage custody and transition typing.
+Pass 6 establishes legal stage custody and transition typing. Pass 7 adds the
+first non-parser semantic transition: bounded core expansion from `Parsed` to
+`Expanded`.
 
 It does not implement semantic macro expansion. It does not establish type
 correctness. It does not normalize language meaning. It does not resolve
@@ -306,10 +308,11 @@ Term 'Lowered
 ```
 
 Public callers may construct only surface input with `surfaceForm`. Parsed
-terms are produced through authorized parser bridges. Later-stage constructors
-are hidden from ordinary public code, and there is no public production API
-that manufactures `Expanded`, `Typed`, `Normalized`, `Resolved`, or `Lowered`
-terms.
+terms are produced through authorized parser bridges. Expanded terms are
+produced only by `expandParsed`, which validates the Pass 7 core-expansion
+postcondition. Later-stage constructors are hidden from ordinary public code,
+and there is no public production API that manufactures `Typed`, `Normalized`,
+`Resolved`, or `Lowered` terms.
 
 The current later-stage payloads are structural custody wrappers around
 canonical syntax. Names such as typed-stage wrapper and resolved-stage custody
@@ -324,9 +327,72 @@ parseSurface
 parseAndLowerMSurface
 ```
 
-Only `Surface -> Parsed` is currently executable. Later transition
-implementations are pending. A legal edge does not attest that its semantic
-obligation has been discharged.
+Currently executable core-expansion bridge:
+
+```haskell
+expandParsed
+```
+
+Only `Surface -> Parsed` and `Parsed -> Expanded` are currently executable.
+Later transition implementations are pending. A legal edge does not attest that
+its semantic obligation has been discharged.
+
+### Parsed-to-Expanded Core Expansion
+
+An expanded term is a canonical S-expression for which the Pass 7
+core-expansion postcondition has been checked:
+
+```text
+reader shorthand is absent
+M-expression syntax is absent
+recognized core forms have canonical proper-list shape
+recognized core forms have valid arity
+improper application forms are rejected
+unknown ordinary application heads remain ordinary applications
+source argument order is preserved
+expansion is deterministic
+expansion is idempotent
+```
+
+Recognized Pass 7 core forms:
+
+```text
+quote
+if
+lambda
+begin
+define
+set!
+```
+
+Arity rules:
+
+```text
+quote   exactly 1 operand
+if      exactly 2 or 3 operands
+lambda  exactly 2 operands: parameter form and body form
+begin   zero or more operands
+define  exactly 2 operands
+set!    exactly 2 operands
+```
+
+Quoted payloads are opaque to core-form interpretation. `(quote (a . b))`
+preserves the improper pair as data, and `(quote (if a b))` does not interpret
+the quoted payload as an `if` form.
+
+Lambda parameters may be `()`, a proper list of unique atom names, or a single
+atom name. Duplicate parameter names and malformed dotted parameter lists are
+typed expansion errors.
+
+`define` accepts only variable definition shape `(define name value)`. Function
+definition sugar such as `(define (f x) body)` is rejected as an unsupported
+derived form.
+
+Expanded means that the Pass 7 core-expansion postcondition has been checked.
+It does not mean macro expansion is complete, names are resolved, types are
+correct, expressions are normalized, or code is executable.
+
+Expansion maximum nesting is 1024.
 
 ### Transition Witnesses
 
@@ -350,7 +416,7 @@ The Pass 6A transition availability table is diagnostic metadata only:
 
 ```text
 Surface -> Parsed       ImplementedTransition
-Parsed -> Expanded      PendingTransition
+Parsed -> Expanded      ImplementedTransition
 Expanded -> Typed       PendingTransition
 Typed -> Normalized     PendingTransition
 Normalized -> Resolved  PendingTransition

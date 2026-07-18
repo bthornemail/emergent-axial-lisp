@@ -64,11 +64,17 @@ The existence of a constructor such as `Resolved` in `StageAxis` does not
 authorize ordinary public code to construct a resolved-stage term.
 
 Pass 6 adds typed transition witnesses for the legal stage edges and hides
-later-stage term constructors. Pass 6A hardens the authority boundary: only the
-`Surface -> Parsed` edge is currently executable, while all later edges are
+later-stage term constructors. Pass 6A hardens the authority boundary. Pass 7
+implements the `Parsed -> Expanded` semantic edge, so the currently executable
+edges are `Surface -> Parsed` and `Parsed -> Expanded`. All later edges remain
 declared as pending semantic implementations.
 
 The legal transition graph is metadata and type evidence. A legal edge does not
 attest that its semantic obligation has been discharged. The stage model does
-not implement semantic expansion, type elaboration, normalization, binding
+not implement macro expansion, type elaboration, normalization, binding
 resolution, executable lowering, validation, projection, or effects.
+
+Expanded custody means the Pass 7 core-expansion postcondition has been
+checked: recognized core forms have proper shape and valid arity, improper
+applications outside `quote` are rejected, quoted data is opaque, and expansion
+is deterministic and idempotent over the tested bounded samples.

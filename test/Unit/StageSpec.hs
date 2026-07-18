@@ -51,13 +51,13 @@ tests =
         , (Resolved, Lowered)
         ]
         transitionEdges
-  , TestCase "stage transition availability has one implemented edge and five pending edges" $ do
+  , TestCase "stage transition availability has two implemented edges and four pending edges" $ do
       assertEqual
         "implemented count"
-        1
+        2
         (length (filter (== ImplementedTransition) transitionAvailabilities))
-      assertEqual "pending count" 5 (length (filter (== PendingTransition) transitionAvailabilities))
-      assertEqual "implemented edge" [SurfaceToParsedEdge] implementedEdges
+      assertEqual "pending count" 4 (length (filter (== PendingTransition) transitionAvailabilities))
+      assertEqual "implemented edge" [SurfaceToParsedEdge, ParsedToExpandedEdge] implementedEdges
   , TestCase "stage Lowered has no outgoing transition" $
       assertEqual "lowered outgoing" 0 (length (outgoingTransitionsFrom Lowered))
   , TestCase "stage SomeTerm preserves its stage witness" $ do
@@ -96,16 +96,24 @@ transitionAvailabilities =
     (\(StageTransitionStatus _ availability) -> availability)
     allStageTransitionStatuses
 
-data EdgeName = SurfaceToParsedEdge
+data EdgeName
+  = SurfaceToParsedEdge
+  | ParsedToExpandedEdge
   deriving stock (Eq, Show)
 
 implementedEdges :: [EdgeName]
 implementedEdges =
-  [ SurfaceToParsedEdge
+  [ edgeName
   | StageTransitionStatus transition ImplementedTransition <- allStageTransitionStatuses
-  , transitionFrom transition == Surface
-  , transitionTo transition == Parsed
+  , edgeName <- implementedEdgeName transition
   ]
+
+implementedEdgeName :: StageTransition from to -> [EdgeName]
+implementedEdgeName transition
+  | transitionFrom transition == Surface && transitionTo transition == Parsed = [SurfaceToParsedEdge]
+  | transitionFrom transition == Parsed && transitionTo transition == Expanded =
+      [ParsedToExpandedEdge]
+  | otherwise = []
 
 negativeFixtures :: [(FilePath, [String])]
 negativeFixtures =
@@ -113,10 +121,15 @@ negativeFixtures =
   , ("test/Negative/LowerParsedDirectly.hs", ["Variable not in scope", "lowerIdentity"])
   , ("test/Negative/ResolveSurface.hs", ["Variable not in scope", "resolveIdentity"])
   , ("test/Negative/ConstructResolved.hs", ["Data constructor not in scope", "ResolvedTerm"])
+  , ("test/Negative/ConstructExpanded.hs", ["Data constructor not in scope", "ExpandedTerm"])
+  , ("test/Negative/ConstructTyped.hs", ["Data constructor not in scope", "TypedTerm"])
   , ("test/Negative/LoweredSuccessor.hs", ["Couldn't match type", "Lowered"])
   , ("test/Negative/MixSomeTermUnchecked.hs", ["Couldn't match type", "stage", "Parsed"])
   , ("test/Negative/ImportRemovedIdentity.hs", ["Module", "does not export", "expandIdentity"])
   , ("test/Negative/CallRemovedIdentity.hs", ["Variable not in scope", "expandIdentity"])
+  , ("test/Negative/AdvanceExpandedToTyped.hs", ["Variable not in scope", "elaborateIdentity"])
+  , ("test/Negative/CallRemovedElaborateIdentity.hs", ["Variable not in scope", "elaborateIdentity"])
+  , ("test/Negative/ParsedAsExpanded.hs", ["Couldn't match type", "Parsed", "Expanded"])
   ]
 
 assertCompileFail :: (FilePath, [String]) -> IO ()

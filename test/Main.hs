@@ -1,9 +1,11 @@
 module Main (main) where
 
+import qualified Golden.ExpansionGolden as ExpansionGolden
 import qualified Golden.MExprGolden as MExprGolden
 import qualified Golden.ParserGolden as ParserGolden
 import qualified Golden.SerializationGolden as SerializationGolden
 import qualified Property.AxisProperties as AxisProperties
+import qualified Property.ExpansionProperties as ExpansionProperties
 import qualified Property.KernelProperties as KernelProperties
 import qualified Property.MExprProperties as MExprProperties
 import qualified Property.ParserRoundTrip as ParserRoundTrip
@@ -11,6 +13,7 @@ import qualified Property.SerializationProperties as SerializationProperties
 import qualified Property.StageProperties as StageProperties
 import TestHarness (runTests)
 import qualified Unit.AxisSpec as AxisSpec
+import qualified Unit.ExpandSpec as ExpandSpec
 import qualified Unit.KernelSpec as KernelSpec
 import qualified Unit.MExprSpec as MExprSpec
 import qualified Unit.ParserSpec as ParserSpec
@@ -24,6 +27,8 @@ main =
         <> KernelProperties.tests
         <> AxisSpec.tests
         <> AxisProperties.tests
+        <> ExpandSpec.tests
+        <> ExpansionProperties.tests
         <> SerializationSpec.tests
         <> SerializationProperties.tests
         <> MExprSpec.tests
@@ -32,6 +37,7 @@ main =
         <> StageProperties.tests
         <> ParserSpec.tests
         <> ParserRoundTrip.tests
+        <> ExpansionGolden.tests
         <> MExprGolden.tests
         <> ParserGolden.tests
         <> SerializationGolden.tests
