@@ -9,5 +9,6 @@ Current execution scope:
 - Pass 2: canonical S-expression parser
 - Pass 3: closed multi-axial type foundation
 - Pass 4: canonical semantic serialization
+- Pass 5: deterministic M-expression lowering
 
 No later pass is implemented by this file.

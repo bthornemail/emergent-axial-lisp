@@ -2,7 +2,7 @@
 
 ## Status
 
-Defined model for Pass 1 through Pass 4.
+Defined model for Pass 1 through Pass 5.
 
 ## Canonical SEXPR
 
@@ -40,7 +40,7 @@ is:
 
 ## Current Non-Authority
 
-This file does not yet define MEXPR lowering, modules, macros, FEXPRs, evaluation, or type elaboration.
+This file does not yet define modules, macros, FEXPRs, evaluation, or type elaboration.
 
 ## Parser Shorthand
 
@@ -177,3 +177,86 @@ value tags.
 The decoder rejects invalid magic, unsupported versions, unknown tags,
 truncated payloads, invalid UTF-8, invalid atoms, oversized text, excessive
 nesting, and trailing bytes after one complete value.
+
+## M-Expression Lowering
+
+Pass 5 defines a deliberately small readable M-expression surface.
+
+M-expression syntax is readable input. It is not canonical runtime identity.
+Lowering does not evaluate, resolve bindings, validate application semantics,
+grant capabilities, or modify serialization tags.
+
+### Source AST
+
+The readable surface parses into a separate source AST:
+
+```haskell
+data MExpr
+  = MAtom Text
+  | MCall Text [MExpr]
+```
+
+This AST is distinct from canonical `SExpr`.
+
+### Grammar
+
+```text
+expression :=
+    identifier
+  | identifier "(" arguments? ")"
+
+arguments :=
+    expression ("," expression)*
+```
+
+Whitespace may occur around identifiers, commas, and parentheses. Comments are
+not part of the Pass 5 M-expression grammar.
+
+### Operators
+
+Operator recognition is case-sensitive. The recognized operators are:
+
+```text
+CONS
+CAR
+CDR
+LIST
+QUOTE
+```
+
+Bare identifiers lower to canonical atoms. Calls with unrecognized operator
+names return a typed `unknown operator` lowering error. No locale-dependent
+case conversion is performed.
+
+### Arity
+
+```text
+CONS  exactly 2
+CAR   exactly 1
+CDR   exactly 1
+QUOTE exactly 1
+LIST  zero or more
+```
+
+Incorrect arity is a typed lowering error.
+
+### Lowering
+
+```text
+CONS(a, b)     -> (cons a b)
+CAR(x)         -> (car x)
+CDR(x)         -> (cdr x)
+LIST(a, b, c)  -> (list a b c)
+LIST()         -> (list)
+QUOTE(x)       -> (quote x)
+```
+
+Nested expressions lower recursively while preserving argument order.
+
+### Limits
+
+```text
+maximum M-expression identifier byte length: 256
+maximum M-expression nesting depth: 1024
+maximum arguments per call: 256
+```

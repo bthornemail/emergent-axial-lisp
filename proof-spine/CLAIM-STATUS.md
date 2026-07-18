@@ -16,6 +16,7 @@
 | Parser | not_applicable | implemented | tested locally | unproved |
 | Canonical pair kernel | not_applicable | implemented | tested locally | unproved |
 | Canonical serialization | not_applicable | implemented | tested locally | unproved |
+| M-expression lowering | pending | implemented | tested locally | unproved |
 | Board256 input domain | proved | pending | pending | unproved |
 | Carrier bands | proved | pending | pending | unproved |
 | Tetrahedral incidence | proved | pending | pending | unproved |

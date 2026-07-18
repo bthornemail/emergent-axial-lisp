@@ -41,5 +41,16 @@ Bootstrap conformance only.
 - golden fixtures lock the Pass 4 magic bytes, version, tags, text lengths, big-endian integer order, and ordered pair payloads
 - invalid magic, unsupported version, unknown value tags, truncated payloads, invalid UTF-8, oversized atoms, oversized identities, trailing bytes, and excessive nesting are rejected
 
+## Pass 5 Tested Behavior
+
+- bare M-expression identifiers lower to canonical atoms
+- `CONS`, `CAR`, `CDR`, `LIST`, and `QUOTE` lower to ordinary canonical call lists
+- nested calls lower recursively while preserving argument order
+- recognized operators are case-sensitive
+- incorrect arity returns typed lowering errors
+- missing commas, missing closing parentheses, empty arguments, trailing input, oversized identifiers, excessive nesting, and excessive argument counts return typed parse errors
+- bounded property-style tests cover lowering determinism, argument-order preservation, canonical parser correspondence, and deterministic serialization of lowered output as a downstream observation
+- golden fixtures lock representative source M-expressions to canonical S-expression output
+
 Proof Spine A is documentation-only. It records upstream theorem correspondence
 but does not prove Haskell correspondence.

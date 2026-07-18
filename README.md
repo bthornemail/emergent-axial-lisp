@@ -20,6 +20,7 @@ Implemented:
 - Proof Spine A documentation bridge to pinned `omi-axioms`
 - Pass 3 closed multi-axial type foundation: closed axis ADTs, singleton witnesses, type-family mappings, and bounded coordinate smart constructors
 - Pass 4 canonical semantic serialization: versioned binary envelope for canonical S-expressions, closed axes, and bounded coordinate values
+- Pass 5 deterministic M-expression lowering: readable `CONS`, `CAR`, `CDR`, `LIST`, and `QUOTE` forms lower to ordinary canonical S-expressions
 
 Not implemented:
 
@@ -34,9 +35,11 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, and canonical semantic serialization.
+The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, canonical semantic serialization, and deterministic M-expression lowering.
 
 Serialization records canonical structure but does not validate application-level meaning, accept declarations, project runtime views, or grant capabilities.
+
+M-expression lowering is readable syntax translation only. It does not evaluate, resolve bindings, validate application semantics, or modify serialization tags.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 
