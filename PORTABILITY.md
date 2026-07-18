@@ -13,6 +13,7 @@ retaining the earlier bootstrap range:
 
 - `base >= 4.17 && < 4.21`
 - `bytestring >= 0.11 && < 0.13`
+- `process >= 1.6 && < 1.7` for the test suite negative-fixture runner
 - `text >= 2.0 && < 2.2`
 - `transformers >= 0.5 && < 0.7`
 
@@ -21,11 +22,12 @@ not a formal compatibility proof for every package version in the range.
 
 ## Tested Package Set
 
-Pass 3 was tested with:
+The current verification run was tested with:
 
 - GHC 9.10.3
 - `base-4.20.2.0`
 - `bytestring-0.12.2.0`
+- `process-1.6.26.1`
 - `text-2.1.3`
 - `parsec-3.1.18.0`
 - `transformers-0.6.1.1`

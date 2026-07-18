@@ -21,12 +21,18 @@ Implemented:
 - Pass 3 closed multi-axial type foundation: closed axis ADTs, singleton witnesses, type-family mappings, and bounded coordinate smart constructors
 - Pass 4 canonical semantic serialization: versioned binary envelope for canonical S-expressions, closed axes, and bounded coordinate values
 - Pass 5 deterministic M-expression lowering: readable `CONS`, `CAR`, `CDR`, `LIST`, and `QUOTE` forms lower to ordinary canonical S-expressions
+- Pass 6 stage-indexed language pipeline: typed stage custody, legal transition witnesses, parser bridges, and compile-fail guards
 
 Not implemented:
 
 - Evaluator
 - Macro or FEXPR system
 - Axis-driven dispatch
+- Semantic macro expansion
+- Type elaboration
+- Normalization
+- Binding resolution
+- Executable lowering
 - Board256
 - Quasigroup resolver profiles
 - Reflection
@@ -35,11 +41,13 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, canonical semantic serialization, and deterministic M-expression lowering.
+The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, closed axis classification types, canonical semantic serialization, deterministic M-expression lowering, and stage-indexed custody.
 
 Serialization records canonical structure but does not validate application-level meaning, accept declarations, project runtime views, or grant capabilities.
 
 M-expression lowering is readable syntax translation only. It does not evaluate, resolve bindings, validate application semantics, or modify serialization tags.
+
+Stage-indexed custody prevents ordinary public code from forging later stages. Pass 6 defines the complete legal stage graph, but only `Surface -> Parsed` is currently executable. Later transitions are declared and pending semantic implementations.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 

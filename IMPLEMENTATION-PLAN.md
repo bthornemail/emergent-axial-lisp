@@ -10,5 +10,7 @@ Current execution scope:
 - Pass 3: closed multi-axial type foundation
 - Pass 4: canonical semantic serialization
 - Pass 5: deterministic M-expression lowering
+- Pass 6: stage-indexed language pipeline
+- Pass 6A: stage authority hardening
 
 No later pass is implemented by this file.

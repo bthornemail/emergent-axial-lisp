@@ -2,7 +2,7 @@
 
 ## Status
 
-Defined model for Pass 1 through Pass 5.
+Defined model for Pass 1 through Pass 6.
 
 ## Canonical SEXPR
 
@@ -260,3 +260,108 @@ maximum M-expression identifier byte length: 256
 maximum M-expression nesting depth: 1024
 maximum arguments per call: 256
 ```
+
+## Stage-Indexed Custody
+
+Pass 6 establishes legal stage custody and transition typing.
+
+It does not implement semantic macro expansion. It does not establish type
+correctness. It does not normalize language meaning. It does not resolve
+bindings. It does not produce executable target code.
+
+### Stage Vocabulary
+
+The closed stage vocabulary is `StageAxis`:
+
+```text
+Surface
+Parsed
+Expanded
+Typed
+Normalized
+Resolved
+Lowered
+```
+
+The diagnostic canonical stage path is:
+
+```text
+Surface -> Parsed -> Expanded -> Typed -> Normalized -> Resolved -> Lowered
+```
+
+`Lowered` has no automatic successor.
+
+### Indexed Terms
+
+Stage-indexed terms carry type-level custody evidence:
+
+```haskell
+Term 'Surface
+Term 'Parsed
+Term 'Expanded
+Term 'Typed
+Term 'Normalized
+Term 'Resolved
+Term 'Lowered
+```
+
+Public callers may construct only surface input with `surfaceForm`. Parsed
+terms are produced through authorized parser bridges. Later-stage constructors
+are hidden from ordinary public code, and there is no public production API
+that manufactures `Expanded`, `Typed`, `Normalized`, `Resolved`, or `Lowered`
+terms.
+
+The current later-stage payloads are structural custody wrappers around
+canonical syntax. Names such as typed-stage wrapper and resolved-stage custody
+must not be read as completed semantic type elaboration or binding resolution.
+
+### Authorized Bridges
+
+Currently executable parser bridges:
+
+```haskell
+parseSurface
+parseAndLowerMSurface
+```
+
+Only `Surface -> Parsed` is currently executable. Later transition
+implementations are pending. A legal edge does not attest that its semantic
+obligation has been discharged.
+
+### Transition Witnesses
+
+Legal transition witnesses are exactly:
+
+```text
+Surface -> Parsed
+Parsed -> Expanded
+Expanded -> Typed
+Typed -> Normalized
+Normalized -> Resolved
+Resolved -> Lowered
+```
+
+There is no witness for `Parsed -> Resolved`, `Lowered -> Surface`,
+`Typed -> Parsed`, or any transition originating at `Lowered`.
+
+### Transition Availability
+
+The Pass 6A transition availability table is diagnostic metadata only:
+
+```text
+Surface -> Parsed       ImplementedTransition
+Parsed -> Expanded      PendingTransition
+Expanded -> Typed       PendingTransition
+Typed -> Normalized     PendingTransition
+Normalized -> Resolved  PendingTransition
+Resolved -> Lowered     PendingTransition
+```
+
+Pending transition entries do not execute and do not grant custody.
+
+### Existential Terms
+
+External heterogeneous storage uses `SomeTerm`, which retains an
+`SStageAxis stage` witness with the staged term. Code cannot safely use the
+payload at a specific stage without checking or otherwise recovering the stage
+evidence.

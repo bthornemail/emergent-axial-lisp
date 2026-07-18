@@ -54,3 +54,21 @@ recovery, projection, or reflection.
 Pass 4 adds canonical binary tags for the closed axis values. Those tags record
 which closed coordinate was serialized. They do not add dispatch behavior,
 validation authority, projection authority, or carrier byte operations.
+
+## Pass 6 Stage Custody Boundary
+
+`StageAxis` is the closed vocabulary of stages. A stage-indexed `Term stage` is
+a separate value that carries custody evidence for one stage.
+
+The existence of a constructor such as `Resolved` in `StageAxis` does not
+authorize ordinary public code to construct a resolved-stage term.
+
+Pass 6 adds typed transition witnesses for the legal stage edges and hides
+later-stage term constructors. Pass 6A hardens the authority boundary: only the
+`Surface -> Parsed` edge is currently executable, while all later edges are
+declared as pending semantic implementations.
+
+The legal transition graph is metadata and type evidence. A legal edge does not
+attest that its semantic obligation has been discharged. The stage model does
+not implement semantic expansion, type elaboration, normalization, binding
+resolution, executable lowering, validation, projection, or effects.

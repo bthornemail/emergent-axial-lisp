@@ -52,5 +52,20 @@ Bootstrap conformance only.
 - bounded property-style tests cover lowering determinism, argument-order preservation, canonical parser correspondence, and deterministic serialization of lowered output as a downstream observation
 - golden fixtures lock representative source M-expressions to canonical S-expression output
 
+## Pass 6 Tested Behavior
+
+- stage witnesses reify to the expected `StageAxis`
+- every stage wrapper exposes the correct witness
+- the canonical stage path has exactly seven values in order
+- canonical surface parsing produces only `Parsed` custody
+- M-expression surface parsing and lowering produces `Parsed` custody through a distinct bridge
+- legal transition witnesses cover exactly six stage edges
+- transition availability marks exactly one implemented edge and five pending edges
+- `Lowered` has no outgoing transition
+- `SomeTerm` preserves its stage witness
+- parsed custody preserves canonical syntax structure
+- compile-fail fixtures reject using `Parsed` as `Typed`, lowering `Parsed` directly, resolving `Surface`, constructing `Resolved` through public constructors, constructing a `Lowered` successor, using existential payloads without stage recovery, importing removed identity-transition functions, and calling removed identity-transition functions
+- bounded property-style tests cover independently specified observed stages, `nextStage` agreement, legal-transition agreement with `NextStage`, transition availability counts, no transition from `Lowered`, and existential stage preservation
+
 Proof Spine A is documentation-only. It records upstream theorem correspondence
 but does not prove Haskell correspondence.
