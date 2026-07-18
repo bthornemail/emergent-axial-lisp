@@ -1,0 +1,62 @@
+cabal-version:      3.0
+name:               emergent-axial-lisp
+version:            0.1.0.0
+synopsis:           Emergent Axial Lisp and Meta-CONS Runtime
+description:        Bootstrap implementation of the canonical Meta-CONS pair kernel.
+license:            BSD-3-Clause
+maintainer:         maintainers@invalid.local
+category:           Language
+build-type:         Simple
+
+source-repository head
+    type:     git
+    location: .
+
+common warnings
+    default-extensions:
+        DerivingStrategies
+        NamedFieldPuns
+        OverloadedStrings
+    ghc-options:
+        -Wall
+        -Wcompat
+        -Wincomplete-record-updates
+        -Wincomplete-uni-patterns
+        -Wredundant-constraints
+
+library
+    import:           warnings
+    exposed-modules:
+        Emergent.Error
+        Emergent.Printer
+        Emergent.Syntax
+        MetaCons.Kernel
+    hs-source-dirs:   src
+    build-depends:
+        base >=4.17 && <4.18,
+        text >=2.0 && <2.1
+    default-language: Haskell2010
+
+executable emergent-axial-lisp
+    import:           warnings
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    build-depends:
+        base >=4.17 && <4.18,
+        emergent-axial-lisp
+    default-language: Haskell2010
+
+test-suite emergent-axial-lisp-test
+    import:           warnings
+    type:             exitcode-stdio-1.0
+    main-is:          Main.hs
+    other-modules:
+        Property.KernelProperties
+        TestHarness
+        Unit.KernelSpec
+    hs-source-dirs:   test
+    build-depends:
+        base >=4.17 && <4.18,
+        emergent-axial-lisp,
+        text >=2.0 && <2.1
+    default-language: Haskell2010
