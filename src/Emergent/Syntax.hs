@@ -68,4 +68,4 @@ isPair _ = False
 
 invalidAtomChar :: Char -> Bool
 invalidAtomChar char =
-  isSpace char || char `elem` ['(', ')', '\'', '`', ',']
+  isSpace char || char `elem` ['(', ')', '\'', '`', ',', ';']

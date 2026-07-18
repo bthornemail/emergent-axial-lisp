@@ -3,6 +3,7 @@ module TestHarness
   , assertBool
   , assertEqual
   , assertLeft
+  , assertRight
   , runTests
   ) where
 
@@ -28,6 +29,11 @@ assertLeft :: Show right => String -> Either left right -> IO ()
 assertLeft _ (Left _) = pure ()
 assertLeft message (Right value) =
   fail (message <> "\nexpected Left, got Right " <> show value)
+
+assertRight :: Show left => String -> Either left right -> IO right
+assertRight _ (Right value) = pure value
+assertRight message (Left value) =
+  fail (message <> "\nexpected Right, got Left " <> show value)
 
 runTests :: [TestCase] -> IO ()
 runTests tests = do

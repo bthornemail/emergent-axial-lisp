@@ -16,10 +16,11 @@ Implemented:
 
 - Pass 0 repository foundation
 - Pass 1 canonical SEXPR kernel: `NIL`, `ATOM`, `PAIR`, `cons`, `car`, `cdr`, structural equality, proper-list helpers, and deterministic canonical printing
+- Pass 2 canonical S-expression parser: atoms, `NIL`, proper lists, dotted pairs, quote shorthand expansion, comments, source positions, and resource bounds
+- Proof Spine A documentation bridge to pinned `omi-axioms`
 
 Not implemented:
 
-- Parser
 - Evaluator
 - Macro or FEXPR system
 - Axes
@@ -31,9 +32,9 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel only.
+The current code establishes tested implementation behavior for the canonical pair kernel and canonical parser only.
 
-Projection, parsing, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
+Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 
 ## Repository Map
 

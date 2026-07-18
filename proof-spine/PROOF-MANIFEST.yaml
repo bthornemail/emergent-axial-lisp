@@ -1,0 +1,193 @@
+proof_spine:
+  upstream:
+    repository: "git@github.com:bthornemail/omi-axioms.git"
+    commit: "92fd11b01d520f650eb52ea101471455a9b65d88"
+    coq_version: "8.18.0"
+    lock_file: "proof-spine/upstream/omi-axioms.lock"
+    strict_result: "failed"
+    strict_failure: "coq/test_dd_show.v contains active Abort."
+
+  invariants:
+    - id: finite-collections
+      owner: "FiniteBasicsEnumeratesSets.v"
+      theorems:
+        - "cardinal_nonnegative"
+        - "cardinal_app"
+        - "subset_refl"
+        - "subset_trans"
+      runtime_module: "planned shared finite foundations"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: board256-input-domain
+      owner: "FiniteTruthTablesCountFunctions.v"
+      theorems:
+        - "eight_inputs_have_256_states"
+      runtime_module: "MetaCons.Bitboard"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: claim-status-ordering
+      owner: "ProofStatusOrdersClaims.v"
+      theorems:
+        - "P0_is_strongest"
+        - "P4_is_weakest"
+        - "status_le_refl"
+        - "status_le_trans"
+      runtime_module: "proof-spine/CLAIM-STATUS.md"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "documentation_only"
+        conformance_vectors: "not_applicable"
+        correspondence: "unproved"
+
+    - id: carrier-control-bands
+      owner: "EarnedControlBandsEncode.v"
+      theorems:
+        - "visible_zero_text_is_not_machine_nul"
+        - "earned_surface_sizes"
+        - "pre_language_precedes_readability"
+      runtime_module: "MetaCons.Carrier"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: diagonal-gauge-closure
+      owner: "DiagonalGaugeCloses.v"
+      theorems:
+        - "active_byte_surface_is_240"
+        - "delta16_width_preserving"
+        - "delta16_deterministic"
+      runtime_module: "MetaCons.Carrier"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: null-ring-closure
+      owner: "NullRingCloses.v"
+      theorems:
+        - "xor_self_cancels"
+        - "byte_ring_closes_to_null"
+        - "every_closed_path_closes"
+      runtime_module: "MetaCons.Quasigroup"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: tetrahedral-incidence
+      owner: "FiniteIncidenceBalancesFlags.v"
+      theorems:
+        - "tetra_incidence_equalities"
+      runtime_module: "MetaCons.Tetrahedral"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: miquel-incidence
+      owner: "MiquelIncidenceBalancesFlags.v"
+      theorems:
+        - "miquel_incidence_balance"
+        - "four_gauges_have_six_pairs"
+      runtime_module: "MetaCons.Tetrahedral"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: quadratic-projection
+      owner: "BQFBridgePreservesForms.v"
+      theorems:
+        - "bqf_decompose"
+      runtime_module: "planned projection specifications"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: metric-projection
+      owner: "MetricProjectionPreservesBounds.v"
+      theorems:
+        - "OMI_SQRT3_squared"
+        - "OMI_PHI_equals_classical_phi"
+      runtime_module: "planned projection specifications"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: pi-projection
+      owner: "PiProjectionPreservesWitnesses.v"
+      theorems:
+        - "omi_pi_projection_series_converges"
+        - "OMI_PI_Equals_Real_PI"
+        - "OMI_PI_from_incidence_equals_PI"
+      runtime_module: "planned projection specifications"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: atomic-replay
+      owner: "AtomicKernelDefinesReplay.v"
+      theorems:
+        - "vnext_delta_deterministic"
+        - "vnext_replay_deterministic"
+      runtime_module: "planned debug interpreter"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: delta-period-eight
+      owner: "Delta16HasExactPeriodEight.v"
+      theorems:
+        - "delta16_001d_has_exact_period_8"
+      runtime_module: "MetaCons.Temporal"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: authority-boundaries
+      owner: "AuthorityPipelinePreservesDecision.v"
+      theorems:
+        - "omnicron_framing_does_not_decide"
+        - "metatron_interpolation_preserves_decision"
+      runtime_module: "planned runtime authority model"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"
+
+    - id: kernel-pi-bridge
+      owner: "OmiPiBridgeConnectsKernel.v"
+      theorems:
+        - "kernel_pi_projection_series_converges"
+        - "kernel_pi_projection_equals_real_pi"
+      runtime_module: "planned projection specifications"
+      status:
+        theorem: "upstream_indexed_proved"
+        haskell: "pending"
+        conformance_vectors: "pending"
+        correspondence: "unproved"

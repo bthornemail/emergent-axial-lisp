@@ -7,6 +7,8 @@ license:            BSD-3-Clause
 maintainer:         maintainers@invalid.local
 category:           Language
 build-type:         Simple
+extra-source-files:
+    test/Golden/Parser/*.sexpr
 
 source-repository head
     type:     git
@@ -28,13 +30,17 @@ library
     import:           warnings
     exposed-modules:
         Emergent.Error
+        Emergent.Parser
         Emergent.Printer
+        Emergent.SourceSpan
         Emergent.Syntax
         MetaCons.Kernel
     hs-source-dirs:   src
     build-depends:
         base >=4.17 && <4.18,
-        text >=2.0 && <2.1
+        parsec >=3.1 && <3.2,
+        text >=2.0 && <2.1,
+        transformers >=0.5 && <0.6
     default-language: Haskell2010
 
 executable emergent-axial-lisp
@@ -51,9 +57,12 @@ test-suite emergent-axial-lisp-test
     type:             exitcode-stdio-1.0
     main-is:          Main.hs
     other-modules:
+        Golden.ParserGolden
+        Property.ParserRoundTrip
         Property.KernelProperties
         TestHarness
         Unit.KernelSpec
+        Unit.ParserSpec
     hs-source-dirs:   test
     build-depends:
         base >=4.17 && <4.18,

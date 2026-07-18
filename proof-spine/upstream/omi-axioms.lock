@@ -1,0 +1,15 @@
+repository_url: "git@github.com:bthornemail/omi-axioms.git"
+commit_hash: "92fd11b01d520f650eb52ea101471455a9b65d88"
+coq_version: "8.18.0"
+ocaml_version: "4.14.1"
+proof_strict:
+  command: "make proof-strict"
+  result: "failed"
+  date_verified_utc: "2026-07-18T13:48:32Z"
+  failure: "coq/test_dd_show.v:13:Abort.; strict Coq check failed: active proof assumptions found"
+coqchk:
+  command: "coqchk"
+  result: "not_run"
+  reason: "make proof-strict stopped before Coq compilation and coqchk."
+copied_files: []
+generated_artifacts_copied: false

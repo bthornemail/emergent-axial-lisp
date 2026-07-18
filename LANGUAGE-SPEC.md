@@ -2,7 +2,7 @@
 
 ## Status
 
-Defined model for Pass 1 only.
+Defined model for Pass 1 and Pass 2 only.
 
 ## Canonical SEXPR
 
@@ -40,4 +40,20 @@ is:
 
 ## Current Non-Authority
 
-This file does not yet define parsing, MEXPR lowering, modules, macros, FEXPRs, evaluation, or type elaboration.
+This file does not yet define MEXPR lowering, modules, macros, FEXPRs, evaluation, or type elaboration.
+
+## Parser Shorthand
+
+The canonical parser accepts quote shorthand only as syntax sugar:
+
+```text
+'form   -> (quote form)
+`form   -> (quasiquote form)
+,form   -> (unquote form)
+,@form  -> (unquote-splicing form)
+```
+
+These parse directly into ordinary canonical S-expression lists. No
+quote-specific constructors are part of canonical `SExpr`.
+
+`printCanonical` emits expanded list form, not shorthand.
