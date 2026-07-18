@@ -26,6 +26,15 @@ sampleNames = ["A", "B", "alpha", "beta-1", "+", "cons"]
 sampleAtoms :: [SExpr]
 sampleAtoms = either (error . show) id . atom <$> sampleNames
 
+sampleAtomA :: SExpr
+sampleAtomA = either (error . show) id (atom "A")
+
+sampleAtomB :: SExpr
+sampleAtomB = either (error . show) id (atom "B")
+
+sampleAtomAlpha :: SExpr
+sampleAtomAlpha = either (error . show) id (atom "alpha")
+
 samplePairs :: [(SExpr, SExpr)]
 samplePairs = [(left, right) | left <- sampleAtoms, right <- sampleAtoms]
 
@@ -42,8 +51,8 @@ sampleExprs :: [SExpr]
 sampleExprs =
   [ nil
   , list (take 3 sampleAtoms)
-  , cons (sampleAtoms !! 0) (sampleAtoms !! 1)
-  , cons (sampleAtoms !! 0) (cons (sampleAtoms !! 1) (sampleAtoms !! 2))
+  , cons sampleAtomA sampleAtomB
+  , cons sampleAtomA (cons sampleAtomB sampleAtomAlpha)
   ]
 
 assertCarLaw :: (SExpr, SExpr) -> IO ()

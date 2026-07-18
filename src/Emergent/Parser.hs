@@ -92,7 +92,8 @@ parseExpr = do
   if currentDepth > maxNestingDepth
     then parseFailure (NestingLimitExceeded maxNestingDepth) "maximum nesting depth exceeded"
     else
-      parseQuoted '\''
+      parseQuoted
+        '\''
         "quote"
         <|> parseQuoted '`' "quasiquote"
         <|> parseUnquote

@@ -13,7 +13,10 @@ tests =
   [ golden "parser proper list golden" "test/Golden/Parser/proper-list.sexpr" "(a b c)"
   , golden "parser improper list golden" "test/Golden/Parser/improper-list.sexpr" "(a b . c)"
   , golden "parser quote golden" "test/Golden/Parser/quote.sexpr" "(quote form)"
-  , golden "parser unquote-splicing golden" "test/Golden/Parser/unquote-splicing.sexpr" "(unquote-splicing form)"
+  , golden
+      "parser unquote-splicing golden"
+      "test/Golden/Parser/unquote-splicing.sexpr"
+      "(unquote-splicing form)"
   ]
 
 golden :: String -> FilePath -> Text -> TestCase

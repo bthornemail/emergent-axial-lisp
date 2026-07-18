@@ -1,15 +1,19 @@
 repository_url: "git@github.com:bthornemail/omi-axioms.git"
-commit_hash: "92fd11b01d520f650eb52ea101471455a9b65d88"
+commit_hash: "973a9de51111a06750395f503f0cb67bc4bd3cad"
 coq_version: "8.18.0"
 ocaml_version: "4.14.1"
 proof_strict:
   command: "make proof-strict"
-  result: "failed"
-  date_verified_utc: "2026-07-18T13:48:32Z"
-  failure: "coq/test_dd_show.v:13:Abort.; strict Coq check failed: active proof assumptions found"
+  result: "passed"
+  date_verified_utc: "2026-07-18T14:39:01Z"
 coqchk:
   command: "coqchk"
-  result: "not_run"
-  reason: "make proof-strict stopped before Coq compilation and coqchk."
+  result: "passed"
+proof:
+  command: "make proof"
+  result: "passed"
+proof_status:
+  command: "make proof-status"
+  result: "active_sources=19; archived_sources=38; forbidden_active=0; artifact_files=95"
 copied_files: []
 generated_artifacts_copied: false

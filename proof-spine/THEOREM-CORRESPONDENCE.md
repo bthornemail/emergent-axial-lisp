@@ -30,6 +30,7 @@ vectors or verified correspondence have been implemented.
 
 ## Current Verification Note
 
-The pinned upstream commit is recorded, but the local `make proof-strict` check
-failed because an active non-owner file contains `Abort.`. This bridge therefore
-does not promote any Haskell implementation to formally verified status.
+The pinned upstream commit passes `make proof`, `make proof-strict`, `coqchk`,
+and `make proof-status`. This bridge still does not promote any Haskell
+implementation to formally verified status without a Level 3 correspondence
+proof.

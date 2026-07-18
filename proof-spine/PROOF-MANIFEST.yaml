@@ -1,11 +1,11 @@
 proof_spine:
   upstream:
     repository: "git@github.com:bthornemail/omi-axioms.git"
-    commit: "92fd11b01d520f650eb52ea101471455a9b65d88"
+    commit: "973a9de51111a06750395f503f0cb67bc4bd3cad"
     coq_version: "8.18.0"
     lock_file: "proof-spine/upstream/omi-axioms.lock"
-    strict_result: "failed"
-    strict_failure: "coq/test_dd_show.v contains active Abort."
+    strict_result: "passed"
+    coqchk_result: "passed"
 
   invariants:
     - id: finite-collections
@@ -17,7 +17,7 @@ proof_spine:
         - "subset_trans"
       runtime_module: "planned shared finite foundations"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -28,7 +28,7 @@ proof_spine:
         - "eight_inputs_have_256_states"
       runtime_module: "MetaCons.Bitboard"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -42,7 +42,7 @@ proof_spine:
         - "status_le_trans"
       runtime_module: "proof-spine/CLAIM-STATUS.md"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "documentation_only"
         conformance_vectors: "not_applicable"
         correspondence: "unproved"
@@ -55,7 +55,7 @@ proof_spine:
         - "pre_language_precedes_readability"
       runtime_module: "MetaCons.Carrier"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -68,7 +68,7 @@ proof_spine:
         - "delta16_deterministic"
       runtime_module: "MetaCons.Carrier"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -81,7 +81,7 @@ proof_spine:
         - "every_closed_path_closes"
       runtime_module: "MetaCons.Quasigroup"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -92,7 +92,7 @@ proof_spine:
         - "tetra_incidence_equalities"
       runtime_module: "MetaCons.Tetrahedral"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -104,7 +104,7 @@ proof_spine:
         - "four_gauges_have_six_pairs"
       runtime_module: "MetaCons.Tetrahedral"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -115,7 +115,7 @@ proof_spine:
         - "bqf_decompose"
       runtime_module: "planned projection specifications"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -127,7 +127,7 @@ proof_spine:
         - "OMI_PHI_equals_classical_phi"
       runtime_module: "planned projection specifications"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -140,7 +140,7 @@ proof_spine:
         - "OMI_PI_from_incidence_equals_PI"
       runtime_module: "planned projection specifications"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -152,7 +152,7 @@ proof_spine:
         - "vnext_replay_deterministic"
       runtime_module: "planned debug interpreter"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -163,7 +163,7 @@ proof_spine:
         - "delta16_001d_has_exact_period_8"
       runtime_module: "MetaCons.Temporal"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -175,7 +175,7 @@ proof_spine:
         - "metatron_interpolation_preserves_decision"
       runtime_module: "planned runtime authority model"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"
@@ -187,7 +187,7 @@ proof_spine:
         - "kernel_pi_projection_equals_real_pi"
       runtime_module: "planned projection specifications"
       status:
-        theorem: "upstream_indexed_proved"
+        theorem: "proved"
         haskell: "pending"
         conformance_vectors: "pending"
         correspondence: "unproved"

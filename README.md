@@ -18,12 +18,14 @@ Implemented:
 - Pass 1 canonical SEXPR kernel: `NIL`, `ATOM`, `PAIR`, `cons`, `car`, `cdr`, structural equality, proper-list helpers, and deterministic canonical printing
 - Pass 2 canonical S-expression parser: atoms, `NIL`, proper lists, dotted pairs, quote shorthand expansion, comments, source positions, and resource bounds
 - Proof Spine A documentation bridge to pinned `omi-axioms`
+- Pass 3 closed multi-axial type foundation: closed axis ADTs, singleton witnesses, type-family mappings, and bounded coordinate smart constructors
 
 Not implemented:
 
 - Evaluator
 - Macro or FEXPR system
-- Axes
+- Axis serialization
+- Axis-driven dispatch
 - Board256
 - Quasigroup resolver profiles
 - Reflection
@@ -32,7 +34,7 @@ Not implemented:
 
 ## Authority Boundaries
 
-The current code establishes tested implementation behavior for the canonical pair kernel and canonical parser only.
+The current code establishes tested implementation behavior for the canonical pair kernel, canonical parser, and closed axis classification types.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 
