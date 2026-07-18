@@ -85,5 +85,20 @@ Bootstrap conformance only.
 - compile-fail fixtures reject direct construction of `Expanded` and `Typed`, advancing `Expanded` to `Typed`, calling removed identity elaboration, and using `Parsed` where `Expanded` is required
 - golden fixtures lock representative canonical S-expression inputs to canonical expanded output
 
+## Pass 8 Specified Behavior
+
+- Typed custody contract is specified as a defined model
+- initial type vocabulary is `Nil`, `Boolean`, `Number`, `Symbol`, `Pair`, `List`, `Function`, and `Unknown`
+- Known, Unknown, and Type error are distinct knowledge outcomes
+- intended judgment is `Gamma |- e : tau |> E`, with symbolic assumptions and effect obligations modeled but not implemented
+- quoted data receives exact structural data typing and remains opaque to executable-form typing
+- functions preserve fixed versus variadic arity evidence
+- `define` introduces symbolic declaration obligations without resolving binding identity
+- `set!` requires an existing symbolic typing assumption and records a mutation effect obligation
+- partial epistemic typing allows explicit Unknown evidence but forbids unresolved contradictions
+- polymorphism, subtyping, coercions, annotation syntax, and executable elaboration are deferred
+- `Expanded -> Typed` remains pending, with no public `Term 'Typed` construction path
+- existing compile-fail guards remain active and no behavioral semantics changed
+
 Proof Spine A is documentation-only. It records upstream theorem correspondence
 but does not prove Haskell correspondence.

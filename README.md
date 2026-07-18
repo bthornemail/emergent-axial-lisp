@@ -23,6 +23,7 @@ Implemented:
 - Pass 5 deterministic M-expression lowering: readable `CONS`, `CAR`, `CDR`, `LIST`, and `QUOTE` forms lower to ordinary canonical S-expressions
 - Pass 6 stage-indexed language pipeline: typed stage custody, legal transition witnesses, parser bridges, and compile-fail guards
 - Pass 7 parsed-to-expanded core expansion: recognized core forms are shape-checked and arity-checked before `Expanded` custody is earned
+- Pass 8 typed custody contract: specifies what future `Typed` custody must certify without implementing elaboration
 
 Not implemented:
 
@@ -50,6 +51,9 @@ M-expression lowering is readable syntax translation only. It does not evaluate,
 Stage-indexed custody prevents ordinary public code from forging later stages. The legal stage graph is complete, but only `Surface -> Parsed` and `Parsed -> Expanded` are currently executable. The remaining transitions are declared and pending semantic implementations.
 
 Expanded custody means the Pass 7 core-expansion postcondition has been checked. It does not mean macros are expanded, names are resolved, types are correct, expressions are normalized, or code is executable.
+
+Typed custody is specified as a contract only. No elaborator exists, and
+ordinary public code still cannot construct `Term 'Typed`.
 
 Projection, evaluation, validation, recovery, reflection, and host effects have no authority in this milestone because they do not exist yet.
 

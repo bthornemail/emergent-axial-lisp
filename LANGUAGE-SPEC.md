@@ -2,7 +2,7 @@
 
 ## Status
 
-Defined model for Pass 1 through Pass 7.
+Defined model for Pass 1 through Pass 8.
 
 ## Canonical SEXPR
 
@@ -40,7 +40,8 @@ is:
 
 ## Current Non-Authority
 
-This file does not yet define modules, macros, FEXPRs, evaluation, or type elaboration.
+This file does not yet define modules, macros, FEXPRs, evaluation, or an
+executable type elaboration pass.
 
 ## Parser Shorthand
 
@@ -393,6 +394,195 @@ It does not mean macro expansion is complete, names are resolved, types are
 correct, expressions are normalized, or code is executable.
 
 Expansion maximum nesting is 1024.
+
+### Typed Custody Contract
+
+Pass 8 defines what `Term 'Typed` will certify. It does not implement
+`Expanded -> Typed`, type inference, runtime type checking, annotation syntax,
+or a public construction path for typed custody.
+
+`Typed` precedes `Resolved`, so typed custody must not depend on resolved
+binding identities, storage locations, module linkage, runtime values,
+capability authorization, host effects, or resolved environment entries. A
+typed term may still contain symbolic names whose binding identities remain
+unresolved.
+
+The initial conceptual type vocabulary is:
+
+```text
+Nil
+Boolean
+Number
+Symbol
+Pair a b
+List a
+Function parameters result
+Unknown
+```
+
+`Unknown` records epistemic absence of sufficient type evidence. It is not a
+universal supertype, dynamic `Any`, automatic successful match, or permission
+to perform arbitrary operations. `Any` is not part of the Pass 8 contract.
+
+Type analysis distinguishes three permanent knowledge states:
+
+```text
+Known type
+The available evidence determines a type.
+
+Unknown type
+Available evidence is insufficient, but no contradiction has been found.
+
+Type error
+Available evidence establishes that the expression violates a declared typing
+obligation.
+```
+
+`Unknown` is not an error, not `Any`, and not proven compatibility.
+
+The intended future typing judgment is:
+
+```text
+Gamma |- e : tau |> E
+```
+
+where `Gamma` is the symbolic typing assumption context for names, `e` is
+expanded canonical syntax, `tau` is resulting type knowledge, and `E` is the
+accumulated effect obligation or declared effect summary. Pass 8 defines this
+judgment only as a model. If the first implementation defers effect tracking,
+`E` remains a pending design component rather than treating mutation as pure.
+
+A future `Term 'Typed` must carry structured evidence sufficient to recover:
+
+```text
+the expanded source structure or explicit correspondence to it
+the inferred or checked type of every expression node
+symbolic assumptions used for free names
+unknown-type locations
+function arity information
+mutation/effect obligations
+the version of the typing rules used
+```
+
+Typing errors must prevent typed custody construction. A wrapper around
+unchanged syntax, such as `newtype TypedForm = TypedForm SExpr`, is
+insufficient for the future typed payload.
+
+Function arity is structured:
+
+```text
+FixedArity [tau1, ..., taun]
+VariadicArity taurest
+```
+
+For currently accepted lambda syntax, the intended arity evidence is:
+
+```text
+(lambda () body)       fixed arity 0
+(lambda (x y) body)    fixed arity 2
+(lambda args body)     variadic
+```
+
+Pass 8 does not establish general polymorphism. Universal quantification, type
+schemes, let-generalization, higher-rank types, subtyping, type classes, and
+row polymorphism are deferred. Future implementations may use fresh internal
+unknown variables during analysis, but those variables are not accepted
+polymorphism without a specified generalization rule.
+
+Initial type equality is structural and exact:
+
+```text
+Nil = Nil
+Boolean = Boolean
+Pair a b = Pair c d only when a = c and b = d
+Function p r = Function q s only when parameter shapes and result types match
+```
+
+`Unknown` is equal only to the same unknown evidence identity, or according to
+a future explicitly specified unification relation. There are no implicit
+coercions, numeric promotions, subtyping, or rule that makes `Unknown` equal to
+every type.
+
+Quoted payloads are data, not executable syntax. Typing must not recursively
+interpret quoted payloads as applications or core forms. Initial quoted-data
+typing is exact and structural:
+
+```text
+quoted atom        -> Symbol
+quoted NIL         -> Nil
+quoted pair        -> Pair quoted-car-type quoted-cdr-type
+quoted proper list -> corresponding nested Pair/Nil structure
+```
+
+An unquoted atom in expression position is a symbolic reference. If the name is
+present in `Gamma`, the associated type evidence is used. If the name is
+absent, the result is explicit Unknown reference evidence, not a fabricated
+type. Contradictory assumptions are typing errors.
+
+Core-form obligations:
+
+```text
+quote
+  result type is the structural quoted-data type
+  payload is opaque to executable-form typing
+
+if
+  condition must be Boolean or explicitly Unknown
+  both branches are analyzed
+  two-operand if uses Nil for the absent alternative
+  result is the common structural type when branches agree
+  result is Unknown when evidence is insufficient
+  contradictory branch requirements are type errors
+
+lambda
+  parameter names introduce symbolic assumptions
+  parameter types begin as explicit unknown variables until annotations exist
+  body is typed under the extended symbolic context
+  result is a Function preserving fixed or variadic arity
+
+begin
+  forms are analyzed in source order
+  empty begin has type Nil
+  non-empty begin has the type of its final form
+  effect obligations accumulate from every form
+
+define
+  introduces a symbolic declaration obligation
+  value expression is typed
+  declared name receives resulting type knowledge for later forms according to
+  the future sequencing scope rules
+
+set!
+  target name must have a symbolic typing assumption
+  assigned value must be structurally compatible with that assumption
+  produces a mutation effect obligation
+  result type is Nil
+```
+
+An absent `set!` target is a typing error under the initial contract because
+mutation requires an existing symbolic declaration obligation.
+
+Mutation is not pure. Typed evidence for mutation must preserve an effect
+obligation such as `Mutation name`. Recording an effect is distinct from
+authorizing or executing it.
+
+Pass 8 adopts partial epistemic typing:
+
+```text
+Unknown evidence is allowed.
+Contradictory evidence is not allowed.
+```
+
+Typed custody therefore means every expression was visited under the declared
+typing rules, every node has known or explicitly unknown type evidence, no
+unresolved typing contradiction remains, function arity and effect obligations
+are preserved, and the evidence records the assumptions under which the result
+was derived.
+
+Typed custody does not mean all types are known, all names are resolved, all
+effects are authorized, the term will evaluate successfully, the term is
+normalized, runtime inputs satisfy the inferred types, or semantic preservation
+is proved.
 
 ### Transition Witnesses
 

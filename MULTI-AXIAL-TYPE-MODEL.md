@@ -2,7 +2,8 @@
 
 ## Status
 
-Defined model with Pass 3 closed-axis foundation implemented.
+Defined model with Pass 3 closed-axis foundation implemented and Pass 8 typed
+custody specified.
 
 The Multi-Axial Runtime Model owns axis definitions, legal coordinate combinations, dispatch rules, resolver profiles, recovery laws, and authority boundaries.
 
@@ -78,3 +79,21 @@ Expanded custody means the Pass 7 core-expansion postcondition has been
 checked: recognized core forms have proper shape and valid arity, improper
 applications outside `quote` are rejected, quoted data is opaque, and expansion
 is deterministic and idempotent over the tested bounded samples.
+
+## Pass 8 Typed Custody Boundary
+
+`StageAxis 'Typed` is a coordinate in the closed stage vocabulary. It is not
+itself evidence that a value has discharged type-analysis obligations.
+
+Future `Term 'Typed` custody must be earned by structured type evidence, not by
+attaching a stage label to an unexamined `SExpr`. That evidence must preserve
+the expanded source correspondence, per-node known or unknown type evidence,
+symbolic typing assumptions, function arity, mutation/effect obligations, and
+the typing-rules version.
+
+Type evidence is distinct from binding resolution, module linkage, storage
+location identity, effect authorization, runtime validation, evaluation, and
+formal semantic proof. A typed term may contain unresolved symbolic names and
+explicit Unknown evidence. It may not contain unresolved type contradictions.
+
+`Expanded -> Typed` remains a pending transition implementation.

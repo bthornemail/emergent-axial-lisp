@@ -25,6 +25,14 @@
 | Expansion determinism | pending | implemented | tested locally | unproved |
 | Expansion idempotence | pending | implemented | tested locally | unproved |
 | Quote opacity | pending | implemented | tested locally | unproved |
+| Typed custody contract | defined_model | pending | documentation_only | unproved |
+| Type vocabulary | defined_model | pending | documentation_only | unproved |
+| Known/Unknown/Error model | defined_model | pending | documentation_only | unproved |
+| Typing judgment | defined_model | pending | documentation_only | unproved |
+| Expanded to Typed transition | pending | pending | tested as unavailable | unproved |
+| Type soundness | pending | pending | pending | unproved |
+| Progress | pending | pending | pending | unproved |
+| Preservation | pending | pending | pending | unproved |
 | Later stage transition implementations | pending | pending | tested as unavailable | unproved |
 | Board256 input domain | proved | pending | pending | unproved |
 | Carrier bands | proved | pending | pending | unproved |

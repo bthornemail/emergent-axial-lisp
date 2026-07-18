@@ -13,5 +13,6 @@ Current execution scope:
 - Pass 6: stage-indexed language pipeline
 - Pass 6A: stage authority hardening
 - Pass 7: parsed-to-expanded core expansion
+- Pass 8: typed custody contract specification
 
 No later pass is implemented by this file.
