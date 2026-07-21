@@ -811,7 +811,7 @@ CONS
 COBS
   zero-safe deterministic stream framing
 
-F*
+US/?O_o [0x1F, 0x2F, 0x3F, 0x4F, 0x5F, 0x6F]
   operator or gauge dialect
 
 OMI-Lisp / Lambda Canon Block
