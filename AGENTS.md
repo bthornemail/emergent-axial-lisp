@@ -140,6 +140,31 @@ Reflection does not automatically grant mutation.
 
 ---
 
+# Layer 1 Physical Wire Core Lock
+
+## 1. Component Isolation
+
+You must operate strictly inside this repository context. Do not generate nested
+execution trees, dynamic heap data pointers, or foreign pipeline layers for the
+local wire substrate. All standalone substrate verification is driven through
+the root `make verify` target.
+
+## 2. Flat Insulated Substrate Registry
+
+All machine-readable Layer 1 substrate files (`.omi`, `.imo`, `.o`, `.hs`, `.h`,
+and `.c`) must remain flat within the project-local `./.omi/` directory
+(expected count: 23). The visible root and `./docs/` directory are reserved for
+human-readable Markdown and front-matter bindings. No internal subfolder nesting
+is permitted under `./.omi/` or `./docs/`.
+
+## 3. Axial Pair Invariants
+
+Every local wire edit must preserve the active law checks for un-nested
+`(CAR . CDR)` recomposition, bounded 32-bit pair packing, bit-7 OMINO
+local/remote separation, and the five canonical substrate target names.
+
+---
+
 # 2. Authority hierarchy
 
 All agents MUST obey this hierarchy:

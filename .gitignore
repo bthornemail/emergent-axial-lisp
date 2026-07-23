@@ -3,6 +3,7 @@ dist-newstyle/
 cabal.sandbox.config
 *.hi
 *.o
+!.omi/*.o
 *.dyn_hi
 *.dyn_o
 
